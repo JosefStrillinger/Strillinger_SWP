@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Example 05: OO-Programming</title>
+    <title>Fifa Team Manager</title>
     <script src="data/teams_fifa22.js"></script>
     <script src="data/players_fifa22.js"></script>
 </head>
@@ -13,13 +13,47 @@
     <br/><br/><br/><br/><br/>
 
     <select id="teams" onchange="change_teams">
-</select>
+    </select>
 
-    <select id="team_members">
-</select>
+    <select id="team_members" onchange="change_players">
+    </select>
 
     <img id="player_img">
     </img>
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Speed </div></th>
+                <th> Shooting </th>
+                <th> Passing </th>
+                <th> Dribbling </th>
+                <th> Defending </th>
+                <th> Physicality </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><div id = player_speed></div></th>
+                <th><div id = player_shooting></div></th>
+                <th><div id = player_passing></div></th>
+                <th><div id = player_dribbling></div></th>
+                <th><div id = player_defending></div></th>
+                <th><div id = player_physicality></div></th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <button id = "add_to_team_1" onclick="add_to_team_1">Add to team 1 </button>
+        
+        <button id = "add_to_team_2" onclick="add_to_team_2">Add to team 2</button>
+
+    </div>
+    <div>
+        <select id = "team_1" onchange="change_team_players"></select>
+
+        <select id = "team_2" onchange="change_team_players"></select>
+    </div>
 
     <script>
         //TODO: Aufgabe machen
@@ -36,17 +70,51 @@
             current_players.forEach(d => team_members_sel.add(new Option(d.Name, d.ID))); //add all players to the option box
         }
 
-        function change_team_player(e) {
+        function change_players(e) {
             let player_sel = e.target;
             let v = player_sel.value;
             let t = player_sel.options[player_sel.selectedIndex].text;
 
             let curr_player = players.find(p => p.Name === t);
             console.log(curr_player.PhotoUrl);
+
             let player_img = document.getElementById("player_img");
             player_img.src = curr_player.PhotoUrl;
 
+            let player_speed = document.getElementById("player_speed");
+            player_speed.innerHTML = curr_player.PaceTotal;
+
+            let player_shooting = document.getElementById("player_shooting");
+            player_shooting.innerHTML = curr_player.ShootingTotal;
+
+            let player_passing = document.getElementById("player_passing");
+            player_passing.innerHTML = curr_player.PassingTotal;
+
+            let player_dribbling = document.getElementById("player_dribbling");
+            player_dribbling.innerHTML = curr_player.DribblingTotal;
+
+            let player_defending = document.getElementById("player_defending");
+            player_defending.innerHTML = curr_player.DefendingTotal;
+
+            let player_physicality = document.getElementById("player_physicality");
+            player_physicality.innerHTML = curr_player.PhysicalityTotal;
+
         }
+
+        function add_to_team_1(e){
+            let player_selected = document.getElementById("team_members");
+            let t = player_selected.options[player_selected.selectedIndex].text;
+        }
+
+        function add_to_team_2(e){
+            let player_selected = document.getElementById("team_members");
+            let t = player_selected.options[player_selected.selectedIndex].text;
+        }
+
+        function change_team_players(e){
+            
+        }
+
         console.log(teams);
         console.log(players[10]);
 
@@ -56,7 +124,7 @@
         teams_sel.addEventListener("change", change_teams);
 
         let team_members_sel = document.getElementById("team_members");
-        team_members_sel.addEventListener("change", change_team_player); //this is another way how to add an eventlistener to the option box
+        team_members_sel.addEventListener("change", change_players); //this is another way how to add an eventlistener to the option box
     </script>
 </body>
 
