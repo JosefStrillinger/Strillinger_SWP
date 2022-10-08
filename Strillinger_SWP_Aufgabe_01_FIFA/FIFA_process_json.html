@@ -50,6 +50,11 @@
 
     </div>
     <div>
+        <button id = "remove_from_team_1" onclick="remove_from_team_1">Remove from team 1</button>
+
+        <button id = "remove_from_team_2" onclick="remove_from_team_2">Remove from team 2</button>
+    </div>
+    <div>
         <select id = "team_1" onchange="change_team_players"></select>
 
         <select id = "team_2" onchange="change_team_players"></select>
@@ -104,16 +109,47 @@
         function add_to_team_1(e){
             let player_selected = document.getElementById("team_members");
             let t = player_selected.options[player_selected.selectedIndex].text;
+
+            let team_1 = document.getElementById("team_1");
+            let team_2 = document.getElementById("team_2");
+            if(!(optionExists(team_1, t) || optionExists(team_2, t))) {
+                team_1.add(new Option(t));
+            }   
         }
 
         function add_to_team_2(e){
             let player_selected = document.getElementById("team_members");
             let t = player_selected.options[player_selected.selectedIndex].text;
+
+            let team_1 = document.getElementById("team_1");
+            let team_2 = document.getElementById("team_2");
+            if(!(optionExists(team_1, t) || optionExists(team_2, t))) {
+                team_2.add(new Option(t));
+            }
+        }
+
+        function remove_from_team_1(e){
+            let team_1 = document.getElementById("team_1");
+            team_1.remove(team_1.selectedIndex);
+        }
+
+        function remove_from_team_2(e){
+            let team_2 = document.getElementById("team_2");
+            team_2.remove(team_2.selectedIndex);
         }
 
         function change_team_players(e){
-            
+            let player_selected = e.target;
+            let v = player_selected.value;
+            let t = player_selected.options[player_sel.selectedIndex].text;
         }
+
+        function optionExists(selectElement, optionValue) {
+            return !!Array.prototype.find.call(selectElement.options, function(option) {
+                return option.value === optionValue;
+            }
+        )
+      }
 
         console.log(teams);
         console.log(players[10]);
@@ -125,6 +161,24 @@
 
         let team_members_sel = document.getElementById("team_members");
         team_members_sel.addEventListener("change", change_players); //this is another way how to add an eventlistener to the option box
+
+        let team_1 = document.getElementById("team_1");
+        team_1.addEventListener("change", change_team_players);
+
+        let team_2 = document.getElementById("team_2");
+        team_2.addEventListener("change", change_team_players);
+
+        let add_team_1 = document.getElementById("add_to_team_1");
+        add_team_1.addEventListener("click", add_to_team_1);
+
+        let add_team_2 = document.getElementById("add_to_team_2");
+        add_team_2.addEventListener("click", add_to_team_2);
+
+        let remove_team_1 = document.getElementById("remove_from_team_1");
+        remove_team_1.addEventListener("click", remove_from_team_1);
+
+        let remove_team_2 = document.getElementById("remove_from_team_2");
+        remove_team_2.addEventListener("click", remove_from_team_2);
     </script>
 </body>
 
