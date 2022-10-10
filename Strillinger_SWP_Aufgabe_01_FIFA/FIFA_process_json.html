@@ -10,7 +10,7 @@
 
 <body>
     Press <b>F12</b> to see the results
-    <br/><br/><br/><br/><br/>
+    <br /><br /><br /><br /><br />
 
     <select id="teams" onchange="change_teams">
     </select>
@@ -23,7 +23,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th> Speed </div></th>
+                <th> Speed</th>
                 <th> Shooting </th>
                 <th> Passing </th>
                 <th> Dribbling </th>
@@ -33,31 +33,43 @@
         </thead>
         <tbody>
             <tr>
-                <th><div id = player_speed></div></th>
-                <th><div id = player_shooting></div></th>
-                <th><div id = player_passing></div></th>
-                <th><div id = player_dribbling></div></th>
-                <th><div id = player_defending></div></th>
-                <th><div id = player_physicality></div></th>
+                <th>
+                    <div id=player_speed></div>
+                </th>
+                <th>
+                    <div id=player_shooting></div>
+                </th>
+                <th>
+                    <div id=player_passing></div>
+                </th>
+                <th>
+                    <div id=player_dribbling></div>
+                </th>
+                <th>
+                    <div id=player_defending></div>
+                </th>
+                <th>
+                    <div id=player_physicality></div>
+                </th>
             </tr>
         </tbody>
     </table>
 
     <div>
-        <button id = "add_to_team_1" onclick="add_to_team_1">Add to team 1 </button>
-        
-        <button id = "add_to_team_2" onclick="add_to_team_2">Add to team 2</button>
+        <button id="add_to_team_1" onclick="add_to_team_1">Add to team 1 </button>
+
+        <button id="add_to_team_2" onclick="add_to_team_2">Add to team 2</button>
 
     </div>
     <div>
-        <button id = "remove_from_team_1" onclick="remove_from_team_1">Remove from team 1</button>
+        <button id="remove_from_team_1" onclick="remove_from_team_1">Remove from team 1</button>
 
-        <button id = "remove_from_team_2" onclick="remove_from_team_2">Remove from team 2</button>
+        <button id="remove_from_team_2" onclick="remove_from_team_2">Remove from team 2</button>
     </div>
     <div>
-        <select id = "team_1" onchange="change_team_players"></select>
+        <select id="team_1" onchange="change_team_players"></select>
 
-        <select id = "team_2" onchange="change_team_players"></select>
+        <select id="team_2" onchange="change_team_players"></select>
     </div>
 
     <script>
@@ -72,7 +84,8 @@
             let current_players = players.filter(p => p.Club === t); //get all players of the selected team
             console.log(current_players);
             team_members_sel.innerHTML = ""; //clear the player option box
-            current_players.forEach(d => team_members_sel.add(new Option(d.Name, d.ID))); //add all players to the option box
+            current_players.forEach(d => team_members_sel.add(new Option(d.Name, d
+            .ID))); //add all players to the option box
         }
 
         function change_players(e) {
@@ -106,50 +119,55 @@
 
         }
 
-        function add_to_team_1(e){
+        function add_to_team_1(e) {
             let player_selected = document.getElementById("team_members");
             let t = player_selected.options[player_selected.selectedIndex].text;
 
             let team_1 = document.getElementById("team_1");
             let team_2 = document.getElementById("team_2");
-            if(!(optionExists(team_1, t) || optionExists(team_2, t))) {
+            if (!(optionExists(team_1, t) || optionExists(team_2, t))) {
                 team_1.add(new Option(t));
-            }   
+            }
         }
 
-        function add_to_team_2(e){
+        function add_to_team_2(e) {
             let player_selected = document.getElementById("team_members");
             let t = player_selected.options[player_selected.selectedIndex].text;
 
             let team_1 = document.getElementById("team_1");
             let team_2 = document.getElementById("team_2");
-            if(!(optionExists(team_1, t) || optionExists(team_2, t))) {
+            if (!(optionExists(team_1, t) || optionExists(team_2, t))) {
                 team_2.add(new Option(t));
             }
         }
 
-        function remove_from_team_1(e){
+        function remove_from_team_1(e) {
             let team_1 = document.getElementById("team_1");
             team_1.remove(team_1.selectedIndex);
         }
 
-        function remove_from_team_2(e){
+        function remove_from_team_2(e) {
             let team_2 = document.getElementById("team_2");
             team_2.remove(team_2.selectedIndex);
         }
 
-        function change_team_players(e){
+        function change_team_players(e) {
             let player_selected = e.target;
             let v = player_selected.value;
             let t = player_selected.options[player_sel.selectedIndex].text;
         }
-
+        //https://bitcoden.com/answers/check-if-an-option-exist-in-select-element-without-jquery ==> 7. Solution
         function optionExists(selectElement, optionValue) {
-            return !!Array.prototype.find.call(selectElement.options, function(option) {
+            return !!Array.prototype.find.call(selectElement.options, function (option) {
                 return option.value === optionValue;
-            }
-        )
-      }
+            })
+        }
+
+        /**
+         * @param {HTMLSelectElement} selectElement
+         * @param {string} optionValue
+         * @return {boolean}
+         */
 
         console.log(teams);
         console.log(players[10]);
@@ -160,7 +178,8 @@
         teams_sel.addEventListener("change", change_teams);
 
         let team_members_sel = document.getElementById("team_members");
-        team_members_sel.addEventListener("change", change_players); //this is another way how to add an eventlistener to the option box
+        team_members_sel.addEventListener("change",
+        change_players); //this is another way how to add an eventlistener to the option box
 
         let team_1 = document.getElementById("team_1");
         team_1.addEventListener("change", change_team_players);
