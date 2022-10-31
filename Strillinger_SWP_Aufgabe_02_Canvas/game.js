@@ -130,7 +130,7 @@ function newBonus() {
 }
 
 function collision() {
-  distance = 20;
+  distance = 10;
   game.enemies.forEach((e) => {
     if (
       Math.abs(game.player.x - e.x) < distance &&
@@ -157,13 +157,13 @@ function updateTimeAndScore() {
 }
 
 function drawScore() {
-  ctx.font = "20px Arial";
+  ctx.font = "20px Georgia";
   ctx.strokeText("Score: " + game.score, 50, 50);
 }
 
 function drawTime() {
-  ctx.font = "20px Arial";
-  ctx.strokeText("Time: " + game.time, 150, 50);
+  ctx.font = "20px Georgia";
+  ctx.strokeText("Time: " + game.time, 200, 50);
 }
 
 function sound(src) {
