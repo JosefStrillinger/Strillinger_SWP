@@ -163,7 +163,7 @@ function drawScore() {
 
 function drawTime() {
   ctx.font = "20px Georgia";
-  ctx.strokeText("Time: " + game.time, 200, 50);
+  ctx.strokeText("Time: " + game.time, 50, 75);
 }
 
 function sound(src) {
