@@ -36,7 +36,7 @@
             </td>
             <td><button @click="updateText(result)">Save</button></td>
             <td><button @click="cancelUpdate()">Cancel</button></td>
-            // eslint-disable-next-line vue/valid-v-for
+
             <div v-for="history in histories" :key="history.id">
               <td>
                 <div
@@ -78,7 +78,7 @@ button {
   background: aquamarine;
 }
 </style>
-<script lang="js">
+<script>
 import {
   api_patch,
   api_search,
