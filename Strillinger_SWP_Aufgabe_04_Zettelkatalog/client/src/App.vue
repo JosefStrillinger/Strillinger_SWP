@@ -1,7 +1,7 @@
 <template>
   <div>
     <input v-model="name" />
-    <button @click="getText">Suche</button>
+    <button @click="getData">Suche</button>
   </div>
   <br /><br />
   <div>
@@ -10,7 +10,11 @@
         <div v-if="editing !== result.id">
           <div class="result-item">
             <td>
-              <img class="result-thumb" :src="result.thumb" alt="image" />
+              <img
+                class="result-thumb"
+                :src="'https://webapp.uibk.ac.at/ubi/cat/' + result.thumb"
+                alt="image"
+              />
             </td>
             <td>
               <div
@@ -26,7 +30,11 @@
         <div v-else>
           <div class="result-item">
             <td>
-              <img class="result-thumb" :src="result.thumb" alt="image" />
+              <img
+                class="result-thumb"
+                :src="'https://webapp.uibk.ac.at/ubi/cat/' + result.thumb"
+                alt="image"
+              />
             </td>
             <td>
               <textarea
@@ -75,7 +83,7 @@
 }
 button {
   font-weight: bold;
-  background: aquamarine;
+  background: aqua;
 }
 </style>
 <script>
@@ -95,7 +103,7 @@ export default {
     };
   },
   methods: {
-    async getText() {
+    async getData() {
       this.results = await api_search(this.name);
     },
     async updateText(result) {
@@ -116,6 +124,33 @@ export default {
     },
     highlight(text) {
       return replaceAll(text, this.name, `${this.name.italics()}`);
+    },
+    makeBold(result, search_word) {
+      let tryout = result.description;
+      search_word = search_word.toLowerCase();
+      // console.log(tryout.description.search(new RegExp(search_word, 'i  ')))
+      let occurences = [];
+      let curIndex = -1;
+      let oldIndex = -1;
+      let cond = true;
+      while (cond) {
+        curIndex = tryout.toLowerCase().indexOf(search_word, oldIndex + 1);
+        if (curIndex <= oldIndex) {
+          break;
+        }
+        occurences.push(curIndex);
+        oldIndex = curIndex;
+      }
+
+      let boldAdded = 0;
+      for (let i = 0; i < occurences.length; i++) {
+        console.log(search_word.length);
+        let index = occurences[i] + 7 * boldAdded;
+        tryout = tryout.replaceAt(index, "<b>");
+        tryout = tryout.replaceAt(index + search_word.length + 3, "</b>");
+        boldAdded++;
+      }
+      return tryout;
     },
   },
 };
