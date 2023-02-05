@@ -13,7 +13,7 @@ from flask_cors import CORS, cross_origin
 Base = declarative_base()  # Basisklasse aller in SQLAlchemy verwendeten Klassen
 metadata = Base.metadata
 
-engine = create_engine('sqlite:///olympics.db', echo=True)
+engine = create_engine('sqlite:///server/olympics.db', echo=True)
 
 db_session = scoped_session(sessionmaker(autocommit=True, autoflush=True, bind=engine))
 Base.query = db_session.query_property() #Dadurch hat jedes Base - Objekt (also auch ein GeoInfo) ein Attribut query für Abfragen

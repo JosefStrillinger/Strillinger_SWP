@@ -1,40 +1,24 @@
-<script setup>
-import TableComponent from "./components/TableComponent.vue";
-</script>
-
 <template>
-  <header></header>
-
-  <main>
-    <TableComponent></TableComponent>
-  </main>
+  <header>Dashboard Olympia</header>
+  <OptionsComponent></OptionsComponent>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <TableComponent></TableComponent>
+        <PlotComponent></PlotComponent>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+  font-size: x-large;
 }
 </style>
+
+<script setup>
+import PlotComponent from "./components/PlotComponent.vue";
+import TableComponent from "./components/TableComponent.vue";
+import OptionsComponent from "./components/OptionsComponent.vue";
+</script>
