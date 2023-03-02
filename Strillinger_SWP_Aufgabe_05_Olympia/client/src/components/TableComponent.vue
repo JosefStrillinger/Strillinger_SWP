@@ -1,5 +1,10 @@
 <template>
-  <DataTable class="table table-hover table-striped" width="100%" :data="data">
+  <DataTable
+    v-if="values != undefined"
+    class="table table-hover table-striped"
+    width="100%"
+    :data="values"
+  >
     <thead>
       <tr>
         <th v-for="c in columns" :key="c">{{ c }}</th>
@@ -12,6 +17,7 @@
 <script>
 import DataTable from "datatables.net-vue3";
 import DataTablesLib from "datatables.net-bs5";
+import { Services, api_request_parameter } from "@/requests.js";
 
 DataTable.use(DataTablesLib);
 
@@ -19,9 +25,30 @@ export default {
   components: {
     DataTable,
   },
-  props: ["data", "columns"],
+  props: {
+    options: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
-    return {};
+    return {
+      columns: [],
+      values: undefined,
+      event: "",
+      country: "",
+    };
+  },
+  methods: {
+    async load_table() {
+      if (this.country != "") {
+        this.columns = ["Name", "Count"];
+        this.values = await api_request_parameter(
+          Services.medals_table,
+          this.country
+        );
+      }
+    },
   },
   setup() {
     console.log("setup");
