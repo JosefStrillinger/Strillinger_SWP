@@ -59,4 +59,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import "bootstrap";
+template {
+  max-width: 20%;
+}
+</style>

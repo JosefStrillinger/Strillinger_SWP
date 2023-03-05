@@ -32,6 +32,7 @@
 @import "bootstrap";
 header {
   font-size: x-large;
+  color: white;
 }
 </style>
 
