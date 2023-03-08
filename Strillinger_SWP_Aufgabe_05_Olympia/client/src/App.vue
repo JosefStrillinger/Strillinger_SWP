@@ -33,6 +33,7 @@
 header {
   font-size: x-large;
   color: white;
+  overflow: hidden;
 }
 </style>
 

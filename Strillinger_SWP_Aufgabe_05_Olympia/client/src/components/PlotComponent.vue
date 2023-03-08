@@ -42,15 +42,15 @@ export default {
   methods: {
     async load_plotly() {
       if (this.country != "") {
-        let result = await api_request_parameter(
+        let response = await api_request_parameter(
           Services.medals_plotly,
           this.country
         );
         this.data = [];
         this.data.push({
-          x: result[0]["x"],
-          y: result[0]["y"],
-          type: result[0]["type"],
+          x: response[0]["x"],
+          y: response[0]["y"],
+          type: response[0]["type"],
         });
         console.log("data: ", this.data);
       }
